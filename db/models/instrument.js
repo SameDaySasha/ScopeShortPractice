@@ -13,6 +13,15 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Instrument.belongsTo(models.Store)
     }
+    static scopeString(){
+      return {where:{type:'string'},}
+    }
+    static woodWind(){
+      return {where:{type:'woodwind'},}
+    }
+    static keyBoard(){
+      return {where:{type:'keyboard'},}
+    }
   }
   Instrument.init({
     name: DataTypes.STRING,
@@ -21,6 +30,19 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Instrument',
+    defaultScope:{attributes:{
+      exclude:[`createdAt`, `updatedAt`]
+    }},
+  //   scopes:{keyboard:{
+  //     where:{type:'keyboard'}
+  //   },
+  //   string:{
+  //     where:{type:'string'}
+  //   },
+  //   woodwind:{
+  //     where:{type:'woodwind'}
+  //   }
+  // }
   });
   return Instrument;
 };

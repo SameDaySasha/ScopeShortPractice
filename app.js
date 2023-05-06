@@ -23,18 +23,18 @@ app.get('/instruments', async (req, res, next) => {
 
 // STEP 2: Implement named scopes to their respective routes
 app.get('/instruments/keyboard', async (req, res, next) => {
-    const keyboards = await Instrument.findAll()
+    const keyboards = await Instrument.scope('keyboard').findAll({order:['id','name','storeId']})
     res.json(keyboards);
 });
 
 
 app.get('/instruments/string', async (req, res, next) => {
-    const strings = await Instrument.findAll()
+    const strings = await Instrument.scope('string').findAll()
     res.json(strings);
 });
 
 app.get('/instruments/woodwind', async (req, res, next) => {
-    const woodWinds = await Instrument.findAll()
+    const woodWinds = await Instrument.scope('woodwind').findAll()
     res.json(woodWinds);
 });
 
